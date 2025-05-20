@@ -1,11 +1,22 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  double result = 0;
+
+  final TextEditingController FirstNumberController = TextEditingController();
+  final TextEditingController SecondNumberController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    double result = 0;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
@@ -20,29 +31,36 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
+                controller: FirstNumberController,
                 decoration: InputDecoration(border: OutlineInputBorder()),
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: 35),
               TextField(
+                controller: SecondNumberController,
                 decoration: InputDecoration(border: OutlineInputBorder()),
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: 35),
-              Container(child: Text('Result : $result' ,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
+              Container(
+                child: Text(
+                  'Result : $result',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                ),
               ),
-              )),
               SizedBox(height: 35),
               SizedBox(
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: (
-                    
-                  ) {},
+                  onPressed: () {
+                    setState(() {
+                      double a = double.parse(FirstNumberController.text) ?? 0;
+                      double b = double.parse(SecondNumberController.text) ?? 0;
+
+                      result = a + b;
+                    });
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan),
                   child: Text(
                     'ADD',
@@ -55,7 +73,14 @@ class HomePage extends StatelessWidget {
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      double a = double.parse(FirstNumberController.text);
+                      double b = double.parse(SecondNumberController.text);
+
+                      result = a - b;
+                    });
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan),
                   child: Text(
                     'SUBTRACT',
@@ -68,7 +93,14 @@ class HomePage extends StatelessWidget {
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      double a = double.parse(FirstNumberController.text);
+                      double b = double.parse(SecondNumberController.text);
+
+                      result = a * b;
+                    });
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan),
                   child: Text(
                     'MULTIPLICATION',
@@ -81,7 +113,14 @@ class HomePage extends StatelessWidget {
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      double a = double.parse(FirstNumberController.text);
+                      double b = double.parse(SecondNumberController.text);
+
+                      result = a / b;
+                    });
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan),
                   child: Text(
                     'dIVISION',
